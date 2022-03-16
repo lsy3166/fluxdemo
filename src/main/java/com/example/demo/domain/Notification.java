@@ -13,5 +13,6 @@ public class Notification {
     private long id;
     private String title;
     private String content;
+    private String userid;
 
 }
