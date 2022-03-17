@@ -43,8 +43,9 @@ public class NotificationController {
 	@PostMapping("/notification/delete")
 	@Transactional
 	public Mono<Void> delete(@RequestBody Notification noti) {
-		sink.tryEmitNext(noti);
-		return notificationRepository.deleteByNotiid(noti.getId());
+		return notificationRepository.deleteByNotiid(noti.getId()).doAfterTerminate(()->{
+			sink.tryEmitNext(noti); // sink에 담아줘야 sse에서 불러올 수 있음
+		});
 	}
 	
 }
