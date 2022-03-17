@@ -2,6 +2,7 @@ package com.example.demo.web;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerSentEvent;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,13 @@ public class NotificationController {
 		return notificationRepository.save(noti).doOnNext(notification -> {
 			sink.tryEmitNext(notification); // sink에 담아줘야 sse에서 불러올 수 있음
 		});
+	}
+	
+	@PostMapping("/notification/delete")
+	@Transactional
+	public Mono<Void> delete(@RequestBody Notification noti) {
+		sink.tryEmitNext(noti);
+		return notificationRepository.deleteByNotiid(noti.getId());
 	}
 	
 }

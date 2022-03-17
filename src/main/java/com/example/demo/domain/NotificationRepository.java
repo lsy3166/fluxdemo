@@ -5,6 +5,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface NotificationRepository extends ReactiveCrudRepository<Notification, Long> {
 	@Query(value = "SELECT b.* "
@@ -14,4 +15,6 @@ public interface NotificationRepository extends ReactiveCrudRepository<Notificat
 			+ "and b.writer != :username "
 			+ "order by id desc")
 	Flux<Notification> findByUserids(@Param("username") String username);
+	
+	Mono<Void> deleteByNotiid(long notiid);
 }

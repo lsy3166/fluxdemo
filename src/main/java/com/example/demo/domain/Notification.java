@@ -14,5 +14,6 @@ public class Notification {
     private String title;
     private String content;
     private String userid;
+    private long notiid;
 
 }
