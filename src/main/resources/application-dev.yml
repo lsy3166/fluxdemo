@@ -1,0 +1,27 @@
+clientHost: 
+  uri: http://localhost:8081
+
+server:
+  port: 4001
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  r2dbc:
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    url: r2dbc:mysql://192.168.55.204:3307/security_docker?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
+    username: security_docker
+    password: lsy3166
+  jpa:
+    hibernate:
+      ddl-auto: update #create update none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
