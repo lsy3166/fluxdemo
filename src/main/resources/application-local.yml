@@ -12,10 +12,20 @@ server:
 
 spring:
   r2dbc:
-    # driver-class-name: com.mysql.cj.jdbc.Driver
     url: r2dbc:mysql://localhost:3306/security?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
     username: security
     password: lsy3166
+    pool:
+      initial-size: 10
+      max-size: 30
+      max-idle-time: 15s 
+      validation-query: SELECT 1  
+    properties:
+      connect-timeout: 10
+      ssl: false
+      max-create-connection-time: 3
+      max-acquire-time: 5
+      max-life-time: 15 
   jpa:
     hibernate:
       ddl-auto: update #create update none
